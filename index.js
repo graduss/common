@@ -164,7 +164,7 @@ exports.COOKIE = {
   }
 };
 
-exports.WorkersContainer = function WorkersContainer : class WorkersContainer {
+exports.WorkersContainer = class WorkersContainer {
   constructor (count, settings = null) {
     this.workers = Array.from(new Array(count))
     .map(() => {
