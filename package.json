@@ -12,6 +12,7 @@
     "bluebird": "^3.5.0",
     "cookie": "^0.3.1",
     "https-proxy-agent": "^1.0.0",
-    "jsdom": "^9.12.0"
+    "jsdom": "^9.12.0",
+    "proxies": "https://github.com/graduss/proxies.git"
   }
 }
