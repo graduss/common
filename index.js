@@ -143,7 +143,7 @@ exports.runScript = function runScript (script) {
   return data;
 };
 
-exports.COOKIE = function COOKIE = {
+exports.COOKIE = {
   encode ( cookies ) {
     return Object.keys(cookies).map((name) => COOKIE.serialize(name, cookies[name])).join('; ');
   },
