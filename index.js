@@ -12,7 +12,8 @@ module.exports = function (path) {
   return {
     jsdom ( conf ) {
       return proxies.getAgent()
-      .then((agent) => {
+      .then((_agent) => {
+        let agent = conf.agent || _agent;
         let rootPromise = new Promise((res, rej) => {
           console.log(`GET : ${conf.url}`);
 
@@ -66,12 +67,14 @@ module.exports = function (path) {
         HTTP=https,
         timeout=void 0,
         rejectUnauthorized=true,
-        family=void 0
+        family=void 0,
+        agent=void 0
       } = options;
       console.log(`IP: ${method}: ${path}`);
 
       return proxies.getAgent()
-      .then((agent) => {
+      .then((_agent) => {
+        agent = agent || _agent;
         let rootPromise = new Promise((resolve,reject)=>{
           let req = HTTP.request({hostname,path,method,headers,rejectUnauthorized,family,agent}, (res) => {
 
