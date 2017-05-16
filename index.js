@@ -177,14 +177,36 @@ module.exports = function (path) {
 
     WorkersContainer : class WorkersContainer {
       constructor (count, settings = null) {
-        this.workers = Array.from(new Array(count))
-        .map(() => {
+        this.settings = settings;
+        this.workers = [];
+
+        Array.from(new Array(count))
+        .forEach(() => {
           if (settings) cluster.setupMaster(settings);
           return cluster.fork();
         });
 
         this.items = null;
         this.updateEventList();
+      }
+
+      createWorker () {
+        let that = this;
+
+        if (this.settings) cluster.setupMaster(settings);
+        let w = cluster.fork()
+        .on('exit', function(code){
+          console.log(`Colse worker code ${code}`)
+          that.closeWorker(w);
+          that.createWorker();
+        });
+
+        this.workers.push(w);
+      }
+
+      closeWorker (worker) {
+        let ind = this.workers.indexOf(worker);
+        if (~ind) this.workers.splice(ind,1);
       }
 
       updateEventList () {
