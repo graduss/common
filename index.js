@@ -194,8 +194,8 @@ module.exports = function (path) {
         let that = this;
 
         if (this.settings) cluster.setupMaster(settings);
-        let w = cluster.fork()
-        .on('exit', function(code){
+        let w = cluster.fork();
+        w.on('exit', function(code){
           console.log(`Colse worker code ${code}`)
           that.closeWorker(w);
           that.createWorker();
