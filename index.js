@@ -181,10 +181,7 @@ module.exports = function (path) {
         this.workers = [];
 
         Array.from(new Array(count))
-        .forEach(() => {
-          if (settings) cluster.setupMaster(settings);
-          return cluster.fork();
-        });
+        .forEach(() => this.createWorker());
 
         this.items = null;
         this.updateEventList();
