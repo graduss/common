@@ -190,7 +190,7 @@ module.exports = function (path) {
       createWorker () {
         let that = this;
 
-        if (this.settings) cluster.setupMaster(settings);
+        if (this.settings) cluster.setupMaster(this.settings);
         let w = cluster.fork();
         w.on('exit', function(code){
           console.log(`Colse worker code ${code}`)
